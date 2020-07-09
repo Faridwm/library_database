@@ -16,23 +16,23 @@ The time required to complete until this stage takes about 2-3 weeks
       Table that contains information about the list of various jobs from members.
   
       ##### Columns
-      | Columns | Data Type | Length | Not Null | Default | Description |
-      | --- | --- | --- | --- | --- | --- |
-      | id | int | 10 | yes | - | primary key for member jobs record |
-      | job_name | varchar | 100 | yes | - | job name, for example: Student, Teacher, etc |
-      | job_dec | varchar | 255 | yes | - | description for job_name |
+      | Columns  | Data Type    | Length | Not Null | Default | Description                                  |
+      |----------|--------------|--------|----------|---------|----------------------------------------------|
+      | id       | int unsigned | 10     | yes      | -       | primary key for member jobs record           |
+      | job_name | varchar      | 100    | yes      | -       | job name, for example: Student, Teacher, etc |
+      | job_dec  | varchar      | 255    | yes      | -       | description for job_name                     |
 
       ##### Constraint
-      | Contraint Type | Contraint Name | Contraint Keys | Description |
-      | --- | --- | --- | --- |
-      | Primary Key | Primary | id | Primary key with value from mbr_jobs_id() |
-      | Unique Key | member_jobs_un_name | job_name | to make sure there are no job_name that have the same name |
+      | Contraint Type | Contraint Name      | Contraint Keys | Description                                                |
+      |----------------|---------------------|----------------|------------------------------------------------------------|
+      | Primary Key    | Primary             | id             | Primary key with value from mbr_jobs_id()                  |
+      | Unique Key     | member_jobs_un_name | job_name       | to make sure there are no job_name that have the same name |
       
       ##### Indexes
-      | Name | Index Type | Unique | Description |
-      | --- | --- | --- | --- |
-      | PRIMARY | BTree | yes | index created by a primary key constraint |
-      | member_jobs_un_name | BTree | yes | index there are no job_name that have the same name |
+      | Name                | Index Type | Unique | Description                                         |
+      |---------------------|------------|--------|-----------------------------------------------------|
+      | PRIMARY             | BTree      | yes    | index created by a primary key constraint           |
+      | member_jobs_un_name | BTree      | yes    | index there are no job_name that have the same name |
       
       ##### Triggers
       Table does not have triggers
@@ -76,13 +76,15 @@ The time required to complete until this stage takes about 2-3 weeks
       Table does not have triggers
   
   3) employees_positions
- 
+      
+      This table contains information about the position of employees in libraries, such as library heads, librarians, administrative officers, etc.
+      
       ##### Columns
       | Columns       | Data Type    | Length | Not Null | Default | Description                                      |
       |---------------|--------------|--------|----------|---------|--------------------------------------------------|
       | id            | int unsigned | 10     | yes      | -       | primary key for employees_positions record       |
-      | position_name | varchar      | 200    | yes      | -       | position name                                    |
-      | position_desc | varchar      | 20     | yes      | -       | job description based on the field position_name |
+      | position_name | varchar      | 100    | yes      | -       | position name                                    |
+      | position_desc | varchar      | 255    | yes      | -       | job description based on the field position_name |
       
       ##### Constraints
       | Constraint Type | Constraint Name             | Constraint Keys | Description                                                 |
@@ -101,7 +103,7 @@ The time required to complete until this stage takes about 2-3 weeks
       
   4) employees
   
-      Table containing information about the employee in the library
+      Table containing information about the employee in the library.
       
       ##### Columns
       | Columns       | Data Type    | Length | Not Null | Default             | Description                                                    |
@@ -119,21 +121,25 @@ The time required to complete until this stage takes about 2-3 weeks
       | status        | tinyint      | 3      | yes      | 1                   | employee status, 1 = active, 0 = not active                    |
       
       ##### Constraints
-      | Constraint Type | Constraint Name | Constraint Keys | Description                          |
-      |-----------------|-----------------|-----------------|--------------------------------------|
-      | Primary Key     | PRIMARY         | id              | primary key with value from emp_id() |
+      | Constraint Type | Constraint Name    | Constraint Keys | Description                            |
+      |-----------------|--------------------|-----------------|----------------------------------------|
+      | Primary Key     | PRIMARY            | id              | primary key with value from emp_id()   |
+      | Unique Key      | employees_un_phone | phone           | unique phone number for every employee | 
       
       ##### Indexes
       | Name                  | Index Type | Unique | Description                                                                                                   |
       |-----------------------|------------|--------|---------------------------------------------------------------------------------------------------------------|
       | PRIMARY               | BTree      | yes    | index cretated by a primary constraint                                                                        |
       | employees_fk_position | BTree      | no     | index has referencing position field on the employees table to the field id on the table employeees_positions |
+      | employees_un_phone    | BTree      | yes    | index for the unique employee's phone number                                                                  |
       
       ##### Triggers
       Table does not have triggers
     
   5) publishers
-  
+      
+      Table contains information about all the publisher's books in the library.
+      
       ##### Columns
       | Columns     | Data Type    | Length | Not Null | Default | Description                              |
       |-------------|--------------|--------|----------|---------|------------------------------------------|
@@ -144,20 +150,23 @@ The time required to complete until this stage takes about 2-3 weeks
       | pub_address | varchar      | 255    | yes      | -       | publisher address                        |
       
       ##### Constraints
-      | Constraint Type | Constraint Name | Constraint Keys | Description                                |
-      |-----------------|-----------------|-----------------|--------------------------------------------|
-      | Primary Key     | PRIMARY         | id              | primary key with value from publisher_id() |
+      | Constraint Type | Constraint Name     | Constraint Keys | Description                                |
+      |-----------------|---------------------|-----------------|--------------------------------------------|
+      | Primary Key     | PRIMARY             | id              | primary key with value from publisher_id() |
+      | Unique Key      | publishers_un_phone | pub_phone       | unique phone number for every publisher    | 
       
       ##### Indexes
-      | Name    | Index Type | Unique | Description                            |
-      |---------|------------|--------|----------------------------------------|
-      | PRIMARY | BTree      | yes    | index cretated by a primary constraint |
+      | Name                | Index Type | Unique | Description                                   |
+      |---------------------|------------|--------|-----------------------------------------------|
+      | PRIMARY             | BTree      | yes    | index cretated by a primary constraint        |
+      | publishers_un_phone | BTree      | yes    | index for the unique publisher's phone number |
       
       ##### Triggers
       Table does not have triggers
   
   6) authors
   
+      Table contains information about all the authors of books that are in the library.
  
       ##### Columns
       | Columns       | Data Type    | Length | Not Null | Default | Description                         |
@@ -171,19 +180,44 @@ The time required to complete until this stage takes about 2-3 weeks
       | address       | varchar      | 255    | yes      | -       | author address                      |
       
       ##### Constraints
-      | Constraint Type | Constraint Name | Constraint Keys | Description                             |
-      |-----------------|-----------------|-----------------|-----------------------------------------|
-      | Primary Key     | PRIMARY         | id              | primary key with value from author_id() |
+      | Constraint Type | Constraint Name  | Constraint Keys | Description                             |
+      |-----------------|------------------|-----------------|-----------------------------------------|
+      | Primary Key     | PRIMARY          | id              | primary key with value from author_id() |
+      | Unique Key      | authors_un_phone | phone           | unique phone number for every author    |
       
       ##### Indexes
-      | Name    | Index Type | Unique | Description                            |
-      |---------|------------|--------|----------------------------------------|
-      | PRIMARY | BTree      | yes    | index cretated by a primary constraint |
+      | Name             | Index Type | Unique | Description                                |
+      |------------------|------------|--------|--------------------------------------------|
+      | PRIMARY          | BTree      | yes    | index cretated by a primary constraint     |
+      | authors_un_phone | BTree      | yes    | index for the unique author's phone number |
       
       ##### Triggers
       Table does not have triggers
       
   7) categories_books
+      
+      Table contains a list of book categories in the library by following the Dewey Decimal Classification system rules.
+      
+      ##### Columns
+      | Columns       | Data Type | Length | Not Null | Default | Description                             |
+      |---------------|-----------|--------|----------|---------|-----------------------------------------|
+      | id            | char      | 3      | yes      | -       | primary key for categories_books record |
+      | category_name | varchar   | 100    | yes      | -       | name of the book category               |
+      | category_desc | varchar   | 255    | yes      | -       | book category description               |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys | Description                                           |
+      |-----------------|-----------------|-----------------|-------------------------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key follows the dewey decimal classification  |
+      
+      ##### Indexes
+      | Name    | Index Type | Unique | Description                            |
+      |---------|------------|--------|----------------------------------------|
+      | Primary | BTree      | yes    | index cretated by a primary constraint |
+      
+      ##### Triggers
+      Table does not have triggers
+  
   8) books
   9) books_authors
   10) loans
