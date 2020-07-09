@@ -26,11 +26,13 @@ The time required to complete until this stage takes about 2-3 weeks
       | Contraint Type | Contraint Name | Contraint Keys | Description |
       | --- | --- | --- | --- |
       | Primary Key | Primary | id | Primary key with value from mbr_jobs_id() |
+      | Unique Key | member_jobs_un_name | job_name | to make sure there are no job_name that have the same name |
       
       ##### Indexes
       | Name | Index Type | Unique | Description |
       | --- | --- | --- | --- |
-      | PRIMARY | BTree | Yes | index created by a primary key constraint |
+      | PRIMARY | BTree | yes | index created by a primary key constraint |
+      | member_jobs_un_name | BTree | yes | index there are no job_name that have the same name |
       
       ##### Triggers
       Table does not have triggers
@@ -60,13 +62,15 @@ The time required to complete until this stage takes about 2-3 weeks
       |-----------------|------------------|-----------------|----------------------------------------------------------------|
       | Primary Key     | PRIMARY          | id              | primary key with value from mbr_id()                           |
       | Unique Key      | members_un_email | email           | unique index. to identify member emails already used only once |
+      | Unique Key      | members_un_phone | phone           | unique phone number for every member                           |
       
       ##### Indexes
-      | Name            | Index Type | Unique | Description                                                                                   |
-      |-----------------|------------|--------|-----------------------------------------------------------------------------------------------|
-      | PRIMARY         | BTree      | yes    | index cretated by a primary constraint                                                        |
-      | member_fk_job   | BTree      | no     | index has referencing job field on the members table to the field id on the table member_jobs |
-      | member_un_email | BTree      | yes    | index for the unique value of an email, and the email can only be used once.                  |
+      | Name             | Index Type | Unique | Description                                                                                   |
+      |------------------|------------|--------|-----------------------------------------------------------------------------------------------|
+      | PRIMARY          | BTree      | yes    | index cretated by a primary constraint                                                        |
+      | member_fk_job    | BTree      | no     | index has referencing job field on the members table to the field id on the table member_jobs |
+      | members_un_email | BTree      | yes    | index for the unique value of an email, and the email can only be used once.                  |
+      | members_un_phone | BTree      | yes    | index for the unique member's phone number                                                    |
       
       ##### Triggers
       Table does not have triggers
@@ -90,7 +94,7 @@ The time required to complete until this stage takes about 2-3 weeks
       | Name                        | Index Type | Unique | Description                                                       |
       |-----------------------------|------------|--------|-------------------------------------------------------------------|
       | PRIMARY                     | BTree      | yes    | index cretated by a primary constraint                            |
-      | employees_positions_un_name | BTree      | yes    | indec to make sure there are no positions that have the same name |
+      | employees_positions_un_name | BTree      | yes    | index there are no positions that have the same name |
       
       ##### Triggers
       Table does not have triggers
