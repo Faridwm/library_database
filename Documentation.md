@@ -71,6 +71,48 @@ The time required to complete until this stage takes about 2-3 weeks
       ##### Triggers
       Table does not have triggers
   
+  3) employees_positions
+  4) employees
+  
+      Table containing information about the employee in the library
+      
+      ##### Columns
+      | Columns       | Data Type    | Length | Not Null | Default             | Description                                                    |
+      |---------------|--------------|--------|----------|---------------------|----------------------------------------------------------------|
+      | id            | int unsigned | 10     | yes      | -                   | primary key for employees record                               |
+      | first_name    | varchar      | 20     | yes      | -                   | employee's first name or nickname                              |
+      | last_name     | varchar      | 30     | yes      | -                   | employee's surname                                             |
+      | gender        | enum(M, F)   | 1      | yes      | -                   | employee's gender, M = Male, F = Female                        |
+      | birthday_date | date         | -      | yes      | -                   | employee's birthday date                                       |
+      | position      | int unsigned | 10     | yes      | -                   | employee position based on id of the table employees_positions |
+      | phone         | varchar      | 20     | yes      | -                   | employee's phone number                                        |
+      | address       | varchar      | 255    | yes      | -                   | employee's address                                             |
+      | hire_date     | date         | -      | yes      | -                   | date employee hired                                            |
+      | created_at    | date         | -      | yes      | current_timestamp() | date employee record created                                   |
+      | status        | tinyint      | 3      | yes      | 1                   | employee status, 1 = active, 0 = not active                    |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys | Description                          |
+      |-----------------|-----------------|-----------------|--------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key with value from emp_id() |
+      
+      ##### Indexes
+      | Name                  | Index Type | Unique | Description                                                                                                   |
+      |-----------------------|------------|--------|---------------------------------------------------------------------------------------------------------------|
+      | PRIMARY               | BTree      | yes    | index cretated by a primary constraint                                                                        |
+      | employees_fk_position | BTree      | no     | index has referencing position field on the employees table to the field id on the table employeees_positions |
+      
+      ##### Triggers
+      Table does not have triggers
+    
+  5) publishers
+  6) authors
+  7) categories_books
+  8) books
+  9) books_authors
+  10) loans
+  11) books_loan
+  
   #### b. Store Procedures
   #### c. Functions
   #### d. Events
