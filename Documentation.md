@@ -72,6 +72,29 @@ The time required to complete until this stage takes about 2-3 weeks
       Table does not have triggers
   
   3) employees_positions
+ 
+      ##### Columns
+      | Columns       | Data Type    | Length | Not Null | Default | Description                                      |
+      |---------------|--------------|--------|----------|---------|--------------------------------------------------|
+      | id            | int unsigned | 10     | yes      | -       | primary key for employees_positions record       |
+      | position_name | varchar      | 200    | yes      | -       | position name                                    |
+      | position_desc | varchar      | 20     | yes      | -       | job description based on the field position_name |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name             | Constraint Keys | Description                                                 |
+      |-----------------|-----------------------------|-----------------|-------------------------------------------------------------|
+      | Primary Key     | PRIMARY                     | id              | primary key with value from emp_position_id()               |
+      | Unique Key      | employees_positions_un_name | position_name   | to make sure there are no positions that have the same name 
+      
+      ##### Indexes
+      | Name                        | Index Type | Unique | Description                                                       |
+      |-----------------------------|------------|--------|-------------------------------------------------------------------|
+      | PRIMARY                     | BTree      | yes    | index cretated by a primary constraint                            |
+      | employees_positions_un_name | BTree      | yes    | indec to make sure there are no positions that have the same name |
+      
+      ##### Triggers
+      Table does not have triggers
+      
   4) employees
   
       Table containing information about the employee in the library
@@ -106,7 +129,56 @@ The time required to complete until this stage takes about 2-3 weeks
       Table does not have triggers
     
   5) publishers
+  
+      ##### Columns
+      | Columns     | Data Type    | Length | Not Null | Default | Description                              |
+      |-------------|--------------|--------|----------|---------|------------------------------------------|
+      | id          | int unsigned | 10     | yes      | -       | primary key for publishers record        |
+      | pub_name    | varchar      | 200    | yes      | -       | publisher name or publisher company name |
+      | pub_phone   | varchar      | 20     | yes      | -       | publisher phone number or fax number     |
+      | pub_city    | varchar      | 100    | yes      | -       | publisher's hometown                     |
+      | pub_address | varchar      | 255    | yes      | -       | publisher address                        |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys | Description                                |
+      |-----------------|-----------------|-----------------|--------------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key with value from publisher_id() |
+      
+      ##### Indexes
+      | Name    | Index Type | Unique | Description                            |
+      |---------|------------|--------|----------------------------------------|
+      | PRIMARY | BTree      | yes    | index cretated by a primary constraint |
+      
+      ##### Triggers
+      Table does not have triggers
+  
   6) authors
+  
+ 
+      ##### Columns
+      | Columns       | Data Type    | Length | Not Null | Default | Description                         |
+      |---------------|--------------|--------|----------|---------|-------------------------------------|
+      | id            | int unsigned | 10     | yes      | -       | primary key for authors record      |
+      | first_name    | varchar      | 20     | yes      | -       | author first name or nickname       |
+      | last_name     | varchar      | 30     | yes      | -       | author surname                      |
+      | gender        | enum(M, F)   | 1      | yes      | -       | author gender, M = Male, F = Female |
+      | birthday_date | date         | -      | yes      | -       | author birthday date                |
+      | phone         | varchar      | 20     | yes      | -       | author phone number                 |
+      | address       | varchar      | 255    | yes      | -       | author address                      |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys | Description                             |
+      |-----------------|-----------------|-----------------|-----------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key with value from author_id() |
+      
+      ##### Indexes
+      | Name    | Index Type | Unique | Description                            |
+      |---------|------------|--------|----------------------------------------|
+      | PRIMARY | BTree      | yes    | index cretated by a primary constraint |
+      
+      ##### Triggers
+      Table does not have triggers
+      
   7) categories_books
   8) books
   9) books_authors
