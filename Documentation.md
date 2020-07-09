@@ -16,11 +16,11 @@ The time required to complete until this stage takes about 2-3 weeks
       Table that contains information about the list of various jobs from members.
   
       ##### Columns
-      | Columns | Data Type | Length | Not Null | Description |
-      | --- | --- | --- | --- | --- |
-      | id | int | 10 | yes | primary key for member jobs record |
-      | job_name | varchar | 100 | yes | job name, for example: Student, Teacher, etc |
-      | job_dec | varchar | 255 | yes | description for job_name |
+      | Columns | Data Type | Length | Not Null | Default | Description |
+      | --- | --- | --- | --- | --- | --- |
+      | id | int | 10 | yes | - | primary key for member jobs record |
+      | job_name | varchar | 100 | yes | - | job name, for example: Student, Teacher, etc |
+      | job_dec | varchar | 255 | yes | - | description for job_name |
 
       ##### Constraint
       | Contraint Type | Contraint Name | Contraint Keys | Description |
