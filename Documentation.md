@@ -9,7 +9,7 @@ The time required to complete until this stage takes about 2-3 weeks
 ### 3. Entity Relational Diagram
 
 
-### 4. Metadata
+### 4. Metadata, Store Procedures, Functions, and Events
   #### a. Tables
   1) member_jobs
   
@@ -45,14 +45,14 @@ The time required to complete until this stage takes about 2-3 weeks
       | Columns        | Data Type    | Length | Not Null | Default                                 | Description                                                               |
       |----------------|--------------|--------|----------|-----------------------------------------|---------------------------------------------------------------------------|
       | id             | int unsigned | 10     | yes      | -                                       | primary key for members record                                            |
-      | email          | varchar      | 50     | yes      | -                                       | member's email                                                            |
-      | first_name     | varchar      | 20     | yes      | -                                       | member's first name or nickname                                           |
-      | last_name      | varchar      | 30     | yes      | -                                       | member's surname                                                          |
-      | gender         | enum(M, F)   | 1      | yes      | -                                       | member's gender, M = Male, F = Female                                     |
-      | phone          | varchar      | 20     | no       | -                                       | member's phone number or home number                                      |
-      | birthday_date  | date         | -      | yes      | -                                       | member's birthday date                                                    |
-      | address        | varchar      | 255    | yes      | -                                       | member's address                                                          |
-      | job            | int unsigned | 10     | yes      | -                                       | member's job based on id of the table member_jobs                         |
+      | email          | varchar      | 50     | yes      | -                                       | member email                                                            |
+      | first_name     | varchar      | 20     | yes      | -                                       | member first name or nickname                                           |
+      | last_name      | varchar      | 30     | yes      | -                                       | member surname                                                          |
+      | gender         | enum(M, F)   | 1      | yes      | -                                       | member gender, M = Male, F = Female                                     |
+      | phone          | varchar      | 20     | no       | -                                       | member phone number or home number                                      |
+      | birthday_date  | date         | -      | yes      | -                                       | member birthday date                                                    |
+      | address        | varchar      | 255    | yes      | -                                       | member address                                                          |
+      | job            | int unsigned | 10     | yes      | -                                       | member job based on id of the table member_jobs                         |
       | created_member | date         | -      | yes      | current_timestamp()                     | date member record created                                                |
       | expired_member | date         | -      | yes      | (current_timestamp() + interval 5 year) | date member expires, 5 years after the record created and can be extended |
       | status         | tinyint      | 3      | yes      | 1                                       | member status, 1 = active, 0 = expired                                    |
@@ -109,13 +109,13 @@ The time required to complete until this stage takes about 2-3 weeks
       | Columns       | Data Type    | Length | Not Null | Default             | Description                                                    |
       |---------------|--------------|--------|----------|---------------------|----------------------------------------------------------------|
       | id            | int unsigned | 10     | yes      | -                   | primary key for employees record                               |
-      | first_name    | varchar      | 20     | yes      | -                   | employee's first name or nickname                              |
-      | last_name     | varchar      | 30     | yes      | -                   | employee's surname                                             |
-      | gender        | enum(M, F)   | 1      | yes      | -                   | employee's gender, M = Male, F = Female                        |
-      | birthday_date | date         | -      | yes      | -                   | employee's birthday date                                       |
+      | first_name    | varchar      | 20     | yes      | -                   | employee first name or nickname                                |
+      | last_name     | varchar      | 30     | yes      | -                   | employee surname                                               |
+      | gender        | enum(M, F)   | 1      | yes      | -                   | employee gender, M = Male, F = Female                          |
+      | birthday_date | date         | -      | yes      | -                   | employee birthday date                                         |
       | position      | int unsigned | 10     | yes      | -                   | employee position based on id of the table employees_positions |
-      | phone         | varchar      | 20     | yes      | -                   | employee's phone number                                        |
-      | address       | varchar      | 255    | yes      | -                   | employee's address                                             |
+      | phone         | varchar      | 20     | yes      | -                   | employee phone number                                          |
+      | address       | varchar      | 255    | yes      | -                   | employee address                                               |
       | hire_date     | date         | -      | yes      | -                   | date employee hired                                            |
       | created_at    | date         | -      | yes      | current_timestamp() | date employee record created                                   |
       | status        | tinyint      | 3      | yes      | 1                   | employee status, 1 = active, 0 = not active                    |
@@ -338,6 +338,52 @@ The time required to complete until this stage takes about 2-3 weeks
       
       
   #### b. Store Procedures
+  
+  1. add_member
+       The procedure used to add new book authors
+       ###### Parameters
+       | Direction | Name          | Data Type      | Length | Description                                   |
+       |-----------|---------------|----------------|--------|-----------------------------------------------|
+       | IN        | first_name    | varchar        | 20     | author first name                             |
+       | IN        | last_name     | varchar        | 30     | author surname                                |
+       | IN        | gender        | enum('M', 'F') | 1      | author gender Male(M)/Female(F)               |
+       | IN        | birthday_date | date           | 10     | author birthday date with format 'yyyy-mm-dd' |
+       | IN        | phone         | varchar        | 20     | author phone number                           |
+       | IN        | address       | varchar        | 255    | author address                                |
+       
+  2. add_book
+  3. add_emp
+       The procedure used to add new employees
+       ##### Parameters
+       | Direction | Name          | Data Type      | Length | Description                                                                     |
+       |-----------|---------------|----------------|--------|---------------------------------------------------------------------------------|
+       | IN        | first_name    | varchar        | 20     | employee first name                                                             |
+       | IN        | last_name     | varchar        | 30     | employee surname                                                                |
+       | IN        | gender        | enum('M', 'F') | 1      | employee gender Male(M)/Female(F)                                               |
+       | IN        | birthday_date | date           | 10     | employee birthday date                                                          |
+       | IN        | position      | int            | 10     | employee position in library, filled with id based on employees_positions table |
+       | IN        | phone         | varchar        | 20     | employee phone number                                                           |
+       | IN        | address       | varchar        | 255    | employee address                                                                |
+       | IN        | hire_date     | date           | 10     | date employee hired                                                             |
+
+  4. add_member
+       The procedure used to add new members
+       ##### Parameters
+       | Direction | Name          | Data Type      | Length | Description                                           |
+       |-----------|---------------|----------------|--------|-------------------------------------------------------|
+       | IN        | first_name    | varchar        | 20     | member first name                                     |
+       | IN        | last_name     | varchar        | 30     | member surname                                        |
+       | IN        | email         | varchar        | 50     | member email                                          |
+       | IN        | gender        | enum('M', 'F') | 1      | member gender Male(M)/Female(F)                       |
+       | IN        | phone         | varchar        | 20     | member phone number                                   |
+       | IN        | birthday_date | date           | 10     | member birthday date                                  |
+       | IN        | address       | varchar        | 255    | member address                                        |
+       | IN        | job           | int            | 10     | member job, filled with id base on members_jobs table |
+       
+  5. extended_member_expired
+  6. loan_book
+  7. return_book
+
   #### c. Functions
   | Function Name   | Parameter | Return           | Description                                  |
   |-----------------|-----------|------------------|----------------------------------------------|
