@@ -219,8 +219,72 @@ The time required to complete until this stage takes about 2-3 weeks
       Table does not have triggers
   
   8) books
+  
+  
+      ##### Columns
+      | Columns      | Data Type         | Length | Not Null | Default | Description                                                  |
+      |--------------|-------------------|--------|----------|---------|--------------------------------------------------------------|
+      | id           | char              | 10     | yes      | -       | primary key for booksrecord                                  |
+      | isbn         | char              | 13     | yes      | -       | 13 digit isbn book number                                    |
+      | name         | varchar           | 100    | yes      | -       | book title                                                   |
+      | category     | char              | 3      | yes      | -       | book category based on id of the table categories_books      |
+      | stock        | smallint unsigned | 5      | yes      | -       | the number of the book in library                            |
+      | avaibility   | smallint unsigned | 5      | yes      | -       | the number of the book that can be borrowed from the library |
+      | publisher    | int unsigned      | 10     | yes      | -       | book publisher based on id of the table publishers           |
+      | release_date | date              | -      | yes      | -       | the date the book was first published                        |
+      | release_city | varchar           | 100    | yes      | -       | the place where the book was first published                 |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys | Description                           |
+      |-----------------|-----------------|-----------------|---------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key with value from book_id() |
+      | Unique Key      | books_un_isbn   | isbn            | unique isbn number for each book      |
+      
+      ##### Indexes
+      | Name               | Index Type | Unique | Description                                                                                           |
+      |--------------------|------------|--------|-------------------------------------------------------------------------------------------------------|
+      | Primary            | BTree      | yes    | index created by a primary constraint                                                                 |
+      | books_fk_category  | BTree      | no     | index has referencing category field on the books table to the field id on the table categories_books |
+      | books_fk_publisher | BTree      | no     | index has referencing publisher field on the book table to the field id on the table publishers       |
+      | books_un_isbn      | BTree      | yes    | index for the unique 13 digit isbn number                                                             |
+      
+      ##### Triggers
+      Table does not have triggers
+      
   9) books_authors
   10) loans
+  
+      ##### Columns
+      | Columns             | Data Type    | Length | Not Null | Default                             | Description                                                                                                                                   |
+      |---------------------|--------------|--------|----------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+      | id                  | int unsigned | 10     | yes      | -                                   | primary key for loans record                                                                                                                  |
+      | id_member           | int unsigned | 10     | yes      | -                                   | id members who borrow books                                                                                                                   |
+      | emp_id_borrow       | int unsigned | 10     | yes      | -                                   | employee id at the time borrowing books                                                                                                       |
+      | date_borrow         | date         | -      | yes      | current_timestamp()                 | books borrowing date                                                                                                                          |
+      | emp_id_return       | int unsigned | 10     | no       | -                                   | employee id at the time returning books                                                                                                       |
+      | date_return         | date         | -      | no       | -                                   | books returning date                                                                                                                          |
+      | expired_date_return | date         | -      | yes      | current_timestamp() + inteval 7 day | deadline for borrowing books, default 7 days after borrowing                                                                                  |
+      | loan_note           | varchar      | 255    | no       | -                                   | additional notes                                                                                                                              |
+      | status              | tinyint      | 3      | yes      | 1                                   | book loan status 0 = books returned 1 = books borrowed 2 = books returned but past the return date 3 = books borrowe and past the return date |
+      
+      ##### Constrains
+      | Constraint Type | Constraint Name | Constraint Keys | Description                                |
+      |-----------------|-----------------|-----------------|--------------------------------------------|
+      | Primary Key     | PRIMARY         | id              | primary key with value from loan_book_id() |
+      
+      ##### Indexes
+      | Name                     | Index Type | Unique | Description                                                                                         |
+      |--------------------------|------------|--------|-----------------------------------------------------------------------------------------------------|
+      | Primary                  | BTree      | yes    | index created by a primary constraint                                                               |
+      | loans_fk_employee_borrow | BTree      | no     | index has referencing emp_id_borrow field on the loans table to the field id on the table employees |
+      | loans_fk_employee_return | BTree      | no     | index has referencing emp_id_return field on the loans table to the field id on the table employees |
+      | loans_fk_member          | BTree      | no     | index has referencing member_id field on the loans table to the field id on the table members       |
+      
+      ##### Triggers
+      | Trigger Name | Timing | Type   | Description                                                    |
+      |--------------|--------|--------|----------------------------------------------------------------|
+      | return_book  | BEFORE | UPDATE | update status in table books_loan when member returning books  |
+      
   11) books_loan
   
   #### b. Store Procedures
