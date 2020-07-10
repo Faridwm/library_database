@@ -339,6 +339,19 @@ The time required to complete until this stage takes about 2-3 weeks
       
   #### b. Store Procedures
   #### c. Functions
+  
+  | Function Name   | Parameter | Return           | Description                                  |
+  |-----------------|-----------|------------------|----------------------------------------------|
+  | author_id       | -         | int(10) unsigned | to generate id on table authors              |
+  | book_id         | -         | char(10)         | to generate id on table books                |
+  | emp_id          | -         | int(10) unsigned | to generate id on table employees            |
+  | emp_position_id | -         | int(10) unsigned | to generate id on table empployees_positions |
+  | loan_book_id    | -         | int(10) unsigned | to generate id on table loans                |
+  | mbr_id          | -         | int(10) unsigned | to generate id on table members              |
+  | mbr_jobs_id     | -         | int(10) unsigned | to generate id on table members_jobs         |
+  | publisher_id    | -         | int(10) unsigned | to generate id on table publishers           |
+      
+      
   #### d. Events
 
 ### 5. Statistics
