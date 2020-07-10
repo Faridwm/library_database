@@ -253,6 +253,27 @@ The time required to complete until this stage takes about 2-3 weeks
       Table does not have triggers
       
   9) books_authors
+      
+      Reference table of relationships many to many between table books and authors.
+      
+      ##### Columns
+      | Columns   | Data Type    | Length | Not Null | Default | Description                  |
+      |-----------|--------------|--------|----------|---------|------------------------------|
+      | id_book   | char         | 10     | yes      | -       | book id from table books     |
+      | id_author | int unsigned | 10     | yes      | -       | author id from table authors |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys    | Description                                                              |
+      |-----------------|-----------------|--------------------|--------------------------------------------------------------------------|
+      | Primary Key     | PRIMARY         | id_book, id_author | primary key for every many-to-many relationship in table book and author |
+      
+      ##### Indexes
+      | Name    | Index Type | Unique | Description                           |
+      |---------|------------|--------|---------------------------------------|
+      | Primary | BTree      | yes    | index created by a primary constraint |
+      
+      ##### Triggers
+      Table does not have triggers
   10) loans
       
       Table that contains information on all borrowing and returning books in the library
