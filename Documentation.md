@@ -1,3 +1,4 @@
+# Documentation
 ### 1. Motives & background.
 
 This Script is created because I want to learn the database from the start table creation, then continue using triggers, store procedure, functions and events.
