@@ -339,7 +339,6 @@ The time required to complete until this stage takes about 2-3 weeks
       
   #### b. Store Procedures
   #### c. Functions
-  
   | Function Name   | Parameter | Return           | Description                                  |
   |-----------------|-----------|------------------|----------------------------------------------|
   | author_id       | -         | int(10) unsigned | to generate id on table authors              |
@@ -351,7 +350,12 @@ The time required to complete until this stage takes about 2-3 weeks
   | mbr_jobs_id     | -         | int(10) unsigned | to generate id on table members_jobs         |
   | publisher_id    | -         | int(10) unsigned | to generate id on table publishers           |
       
-      
   #### d. Events
+  | Event Name              | Type      | Interval Value | Interval Field | Description                                                              |
+  |-------------------------|-----------|----------------|----------------|--------------------------------------------------------------------------|
+  | check_sts_member        | RECURRING | 1              | DAY            | event that will run every day to check membership status                 |
+  | check_loan_book_expired | RECURRING | 1              | DAY            | event taht will run every day to check the book loan has expired or not  |
+  
 
 ### 5. Statistics
+  The number of lines needed to write the sql script is 659 lines
