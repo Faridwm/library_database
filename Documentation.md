@@ -353,6 +353,19 @@ The time required to complete until this stage takes about 2-3 weeks
        | IN        | address       | varchar        | 255    | author address                                |
        
   2. add_book
+       The procedure used to add new book
+       ##### Parameters
+       | Direction | Name         | Data Type | Length | Description                                                             |
+       |-----------|--------------|-----------|--------|-------------------------------------------------------------------------|
+       | IN        | isbn         | char      | 13     | book 13 digit isbn number                                               |
+       | IN        | name         | varchar   | 100    | book title                                                              |
+       | IN        | category     | char      | 3      | book category, filled with id based on categories_books table           |
+       | IN        | stock        | smallint  | 5      | as an initial stock of books and amoun of book that can be borrowed     |
+       | IN        | publisher    | int       | 10     | book publisher, filled with id based on publishers table                |
+       | IN        | release_date | date      | 10     | book release date                                                       |
+       | IN        | release_city | varchar   | 100    | the place where the book was first published                            |
+       | IN        | ls_authors   | varchar   | 255    | string of author's id, example: "1" or "1, 2" (if author more than one) |
+       
   3. add_emp
        The procedure used to add new employees
        ##### Parameters
@@ -379,9 +392,15 @@ The time required to complete until this stage takes about 2-3 weeks
        | IN        | phone         | varchar        | 20     | member phone number                                   |
        | IN        | birthday_date | date           | 10     | member birthday date                                  |
        | IN        | address       | varchar        | 255    | member address                                        |
-       | IN        | job           | int            | 10     | member job, filled with id base on members_jobs table |
+       | IN        | job           | int            | 10     | member job, filled with id based on members_jobs table |
        
   5. extended_member_expired
+       The procedure for extending member validity period
+       ##### Parameters
+       | Direction | Name   | Data Type | Length | Description                         |
+       |-----------|--------|-----------|--------|-------------------------------------|
+       | IN        | mbr_id | int       | 10     | member's id, based on members table |
+       
   6. loan_book
   7. return_book
 
