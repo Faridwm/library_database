@@ -402,7 +402,22 @@ The time required to complete until this stage takes about 2-3 weeks
        | IN        | mbr_id | int       | 10     | member's id, based on members table |
        
   6. loan_book
+       The procedure used when borrowing books
+       | Direction | Name       | Data Type | Length | Description                                                                        |
+       |-----------|------------|-----------|--------|------------------------------------------------------------------------------------|
+       | IN        | member_id  | int       | 10     | member id who borrowing books                                                      |
+       | IN        | emp_id     | int       | 10     | employee id when borrowing books                                                   |
+       | IN        | ls_book_id | varchar   | 255    | string of book's id to be borrowed, example: "1" or "1, 2" (if book more than one) |
+       | IN        | loan_note  | varchar   | 255    | additional note, if empty used ""                                                  |
+       
   7. return_book
+       The procedure used when returning books
+       ##### Parameters
+       | Direction | Name        | Data Type | Length | Description                     |
+       |-----------|-------------|-----------|--------|---------------------------------|
+       | IN        | loan_id     | int       | 10     | loan id                         |
+       | IN        | emp_id      | int       | 10     | employee id when returning book |
+       | IN        | return_date | date      | 10     | the date the book was returned  |
 
   #### c. Functions
   | Function Name   | Parameter | Return           | Description                                  |
