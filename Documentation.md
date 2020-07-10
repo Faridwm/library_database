@@ -311,6 +311,32 @@ The time required to complete until this stage takes about 2-3 weeks
       
   11) books_loan
   
+      Reference table of relationships many to many between table books and loans.
+      
+      ##### Columns
+      | Columns | Data Type      | Length | Not Null | Default | Description                                              |
+      |---------|----------------|--------|----------|---------|----------------------------------------------------------|
+      | id_book | char           | 10     | yes      | -       | book id from table books                                 |
+      | id_loan | int unsigned   | 10     | yes      | -       | loan id from table loans                                 |
+      | status  | enum('0', '1') | 1      | yes      | 1       | book loan status, 0 = book returning, 1 = book borrowing |
+      
+      ##### Constraints
+      | Constraint Type | Constraint Name | Constraint Keys  | Description                                                              |
+      |-----------------|-----------------|------------------|--------------------------------------------------------------------------|
+      | Primary Key     | PRIMARY         | id_book, id_loan | primary key for every many-to-many relationship in table books and loans |
+      
+      ##### Indexes 
+      | Name    | Index Type | Unique | Description                           |
+      |---------|------------|--------|---------------------------------------|
+      | Primary | BTree      | yes    | index created by a primary constraint |
+      
+      ##### Triggers
+      | Trigger Name             | Timing | Type   | Description                                       |
+      |--------------------------|--------|--------|---------------------------------------------------|
+      | avaibility_after_loan    | AFTER  | INSERT | updating book avaibility when books are borrowed  |
+      | availbility_after_return | BEFORE | UPDATE | updating book avaibility when books are returned  |
+      
+      
   #### b. Store Procedures
   #### c. Functions
   #### d. Events
