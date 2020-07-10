@@ -8,6 +8,7 @@ The time required to complete until this stage takes about 2-3 weeks
 
 ### 3. Entity Relational Diagram
 
+![alt text](https://github.com/Faridwm/library_database/blob/master/library%20erd.png)
 
 ### 4. Metadata, Store Procedures, Functions, and Events
   #### a. Tables
