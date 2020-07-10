@@ -220,6 +220,7 @@ The time required to complete until this stage takes about 2-3 weeks
   
   8) books
   
+      Table that contains information on all books in the library.
   
       ##### Columns
       | Columns      | Data Type         | Length | Not Null | Default | Description                                                  |
@@ -253,6 +254,8 @@ The time required to complete until this stage takes about 2-3 weeks
       
   9) books_authors
   10) loans
+      
+      Table that contains information on all borrowing and returning books in the library
   
       ##### Columns
       | Columns             | Data Type    | Length | Not Null | Default                             | Description                                                                                                                                   |
